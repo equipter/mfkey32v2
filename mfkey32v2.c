@@ -19,7 +19,8 @@ int main(int argc, char *argv[]) {
     uint32_t ks2;     // keystream used to encrypt reader response
 
     printf("MIFARE Classic key recovery - based 32 bits of keystream  VERSION2\n");
-    printf("Recover key from two 32-bit reader authentication answers only\n\n");
+    printf("Recover key from two 32-bit reader authentication answers only\n");
+    printf("This version implements Moebius two different nonce solution (like the supercard)\n\n");
 
     if (argc < 8) {
         printf("syntax: %s <uid> <nt> <nr_0> <ar_0> <nt1> <nr_1> <ar_1>\n\n", argv[0]);
