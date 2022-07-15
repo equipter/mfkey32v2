@@ -15,7 +15,7 @@
 // See LICENSE.txt for the text of the license.
 //-----------------------------------------------------------------------------
 #include <stdlib.h>
-#include "crapto1.h"
+#include "crypto01.h"
 #include "parity.h"
 
 #ifdef __OPTIMIZE_SIZE__

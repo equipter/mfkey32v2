@@ -14,8 +14,8 @@
 //
 // See LICENSE.txt for the text of the license.
 //-----------------------------------------------------------------------------
-#ifndef CRAPTO1_INCLUDED
-#define CRAPTO1_INCLUDED
+#ifndef crypto01_INCLUDED
+#define crypto01_INCLUDED
 
 #include <stdint.h>
 #include <stddef.h>
