@@ -48,4 +48,4 @@ your command should look like this:
 your key should be popped out like so 
 `Found Key: [a0a1a2a3a4a5]`
 
-ta da! your keyA for block3 is: a0a1a2a3a4a5
+ta da! your keyA for block3 is: `a0a1a2a3a4a5`
