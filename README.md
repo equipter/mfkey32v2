@@ -29,7 +29,7 @@ if you arent comfortable or capable of running mfkey32v2 by yourself. Message yo
 [instructions for CLI](https://forum.flipperzero.one/t/cli-command-line-interface-examples/1874) 
 link to [webcli](https://my.flipp.dev/)
 5. start `log` 
-6. while still emulating the UID, approach your flipperxero to the reader 
+6. while still emulating the UID, approach your flipperzero to the reader 
 7. your CLI should output logs see below for an example. find the lines like this 
 ```
 70795 [D][MfClassic]: 939be0d5 keyA block 3 nt/nr/ar: 4e70d691 b3a576be 02c1559b
