@@ -5,7 +5,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "crapto1/crapto1.h"
-#include "util_posix.h"
+#include "include/util_posix.h"
 
 int main(int argc, char *argv[]) {
     struct Crypto1State *revstate;
