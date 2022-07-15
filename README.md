@@ -12,7 +12,7 @@ Calculates sector keys from nonces.
 1. Before compiling make sure your gcc is up to date 
 2. Download code
 3. Navigate into repo directory 
-4. Compile with `gcc mfkey32v2.c crapto1/crapto1.c crapto1/crypto1.c crapto1/bucketsort.c -o mfkey32v2 -Iinclude`
+4. Compile with `gcc mfkey32v2.c crypto1/crypto1.c crypto1/crypto01.c crypto1/bucketsort.c -o mfkey32 -Iinclude`
 
 now that youve compiled youre ready to use!
 
