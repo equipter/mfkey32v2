@@ -20,6 +20,7 @@ now that youve compiled youre ready to use!
 command syntax for mfkey32v2 is `./mfkey32v2 <uid> <nt> <nr_0> <ar_0> <nt1> <nr_1> <ar_1>`
 
 if you've come from the flipper mfkey32v2 logging, instructions for your command structuring is below:
+if you arent comfortable or capable of running mfkey32v2 by yourself. Message your log output to bettse or equip on discord. 
 
 1. On your FZ navigate to settings an enable debug. 
 2. Then on log level, adjust to `Debug` 
@@ -34,7 +35,7 @@ link to [webcli](https://my.flipp.dev/)
 70795 [D][MfClassic]: 939be0d5 keyA block 3 nt/nr/ar: 4e70d691 b3a576be 02c1559b
 77521 [D][MfClassic]: 939be0d5 keyA block 3 nt/nr/ar: c6efb126 d24dd966 03fc7386
 ```
-3. run ./mfkey32v2 with parameters like such 
+8. run ./mfkey32v2 with parameters like such 
 `./mfkey32v2 [uid] [topline log] [bottomline log]`
 example: UID 939be0d5 
 ```
