@@ -5,7 +5,7 @@
 | ![GitHub followers](https://img.shields.io/github/followers/equipter?label=Equipter%20&logo=GitHub&style=flat-square) | ![Twitter Follow](https://img.shields.io/twitter/follow/equip0x80?color=b9d1ff&label=Equip0x80&logo=Twitter&style=flat-square) | ![Subreddit subscribers](https://img.shields.io/reddit/subreddit-subscribers/rfid?logo=reddit&logoColor=ffffff&style=flat-square) | equip paypal: equipter@outlook.com | bettse paypal: bettse@fastmail.fm |
 | :---: | :---: | :---: | :---: | :---: |
 
-Mfkey32v2 extracts keys from nonces collected during the authentication process. these nonces can be collected by emulating the credential to allow the reader to begin despensing the necessary information to begin extraction. 
+Mfkey32v2 extracts keys from nonces collected during the authentication process. These nonces can be collected by emulating the credential to allow the reader to begin despensing the necessary information to begin extraction. 
 
 ## Requirements 
 `GCC for compiling C`
@@ -28,7 +28,7 @@ if you arent comfortable or capable of running mfkey32v2 by yourself. Message yo
 1. On your FZ navigate to settings an enable debug. 
 2. Then on log level, adjust to `Debug` 
 3. Scan your Mifare Classic and begin `read mifare classic` special action
-(NOTE: you do not need to have found any keys you just need have a base .nfc file from the output)
+**(NOTE: you do not need to have found any keys you just need have a base .nfc file from the output)**
 4. Save your credential on the flipper and begin the card emulation
 5. open your Flipper CLI 
 [instructions for CLI](https://forum.flipperzero.one/t/cli-command-line-interface-examples/1874) 
@@ -45,7 +45,6 @@ link to [webcli](https://my.flipp.dev/)
 example: UID 939be0d5 
 ```
 70795 [D][MfClassic]: 939be0d5 keyA block 3 nt/nr/ar: 4e70d691 b3a576be 02c1559b
-...
 77521 [D][MfClassic]: 939be0d5 keyA block 3 nt/nr/ar: c6efb126 d24dd966 03fc7386
 ```
 your command should look like this:
@@ -53,4 +52,4 @@ your command should look like this:
 your key should be popped out like so 
 `Found Key: [a0a1a2a3a4a5]`
 
-ta da! your keyA for block3 is: `a0a1a2a3a4a5`
+your keyA for Sector 3 is: `a0a1a2a3a4a5`
