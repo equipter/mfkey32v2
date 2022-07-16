@@ -15,7 +15,7 @@ Mfkey32v2 extracts keys from nonces collected during the authentication process.
 1. Before compiling make sure your gcc is up to date 
 2. Download code
 3. Navigate into repo directory 
-4. Compile with `gcc mfkey32v2.c crypto1/crypto1.c crypto1/crypto01.c crypto1/bucketsort.c -o mfkey32 -Iinclude`
+4. Compile with `gcc mfkey32v2.c crypto1/crypto1.c crypto1/crypto01.c crypto1/bucketsort.c -o mfkey32v2 -Iinclude`
 
 now that youve compiled youre ready to use!
 
