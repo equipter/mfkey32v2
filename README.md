@@ -5,8 +5,11 @@
 | ![GitHub followers](https://img.shields.io/github/followers/equipter?label=Equipter%20&logo=GitHub&style=flat-square) | ![Twitter Follow](https://img.shields.io/twitter/follow/equip0x80?color=b9d1ff&label=Equip0x80&logo=Twitter&style=flat-square) | ![Subreddit subscribers](https://img.shields.io/reddit/subreddit-subscribers/rfid?logo=reddit&logoColor=ffffff&style=flat-square) | equip paypal: equipter@outlook.com | bettse paypal: bettse@fastmail.fm |
 | :---: | :---: | :---: | :---: | :---: |
 
+Mfkey32v2 extracts keys from nonces collected during the authentication process. these nonces can be collected by emulating the credential to allow the reader to begin despensing the necessary information to begin extraction. 
 
-Calculates sector keys from nonces. 
+## Requirements 
+`GCC for compiling c`
+`
 
 ## Compilation 
 1. Before compiling make sure your gcc is up to date 
