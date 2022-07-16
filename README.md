@@ -7,8 +7,11 @@
 
 Mfkey32v2 extracts keys from nonces collected during the authentication process. These nonces can be collected by emulating the credential to allow the reader to begin despensing the necessary information to begin extraction. 
 
+For any problems or questions feel free to reach out to me on discord Equip#1515 
+
 ## Requirements 
 `GCC for compiling C`
+
 `For compiling on windows you'll need a C compiler or use MINGW to create a virtual environment to use GCC`
 
 ## Compilation 
