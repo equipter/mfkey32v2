@@ -74,6 +74,7 @@ This project is used by the following Repositories:
 
 - [FlipperZero Offical firmware](https://github.com/flipperdevices/flipperzero-firmware)
 - [RogueMaster FlipperZero Firmware](https://github.com/RogueMaster/flipperzero-firmware-wPlugins)
+- [Credited in DJsime Awesome-Flipperzero](https://github.com/djsime1/awesome-flipperzero/blob/main/Firmwares.md)
 
 
 ## Support
