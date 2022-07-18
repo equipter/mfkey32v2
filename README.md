@@ -42,7 +42,9 @@ link to [webcli](https://my.flipp.dev/)
 70795 [D][MfClassic]: 939be0d5 keyA block 3 nt/nr/ar: 4e70d691 b3a576be 02c1559b
 77521 [D][MfClassic]: 939be0d5 keyA block 3 nt/nr/ar: c6efb126 d24dd966 03fc7386
 ```
-9. run ./mfkey32v2 with parameters like such 
+now, on your external device where you have downloaded and compiled mfkey32v2 
+
+run `./mfkey32v2` with parameters like such 
 `./mfkey32v2 [uid] [topline log] [bottomline log]`
 example: UID 939be0d5 
 ```
