@@ -27,7 +27,8 @@ make for utilising the makefile. build-essential contains both of these for you 
 - `git clone https://github.com/equipter/mfkey32v2`
 3. Navigate into repo directory 
 - `cd mfkey32v2/`
-4. Compile code with `make` 
+4. Compile code with make
+- `make mfkey32v2`
 
 (if make is for some reason non cooperative you can manually compile with gcc using this command `gcc mfkey32v2.c include/crypto1.c include/crypto01.c include/bucketsort.c -o mfkey32v2 -Iinclude`
 
