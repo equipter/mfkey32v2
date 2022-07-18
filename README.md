@@ -15,6 +15,7 @@ Mfkey32v2 extracts keys from nonces collected during the authentication process.
 
 ## Requirements 
 GCC for compiling C (deb)
+make for utilising the makefile. build-essential contains both of these for you to use
 - `sudo apt install build-essential`
 
 
@@ -26,8 +27,9 @@ GCC for compiling C (deb)
 - `git clone https://github.com/equipter/mfkey32v2`
 3. Navigate into repo directory 
 - `cd mfkey32v2/`
-4. Compile code with GCC
-- `gcc mfkey32v2.c crypto1/crypto1.c crypto1/crypto01.c crypto1/bucketsort.c -o mfkey32v2 -Iinclude`
+4. Compile code with `make` 
+
+(if make is for some reason non cooperative you can manually compile with gcc using this command `gcc mfkey32v2.c include/crypto1.c include/crypto01.c include/bucketsort.c -o mfkey32v2 -Iinclude`
 
 
 ## Standalone Usage
