@@ -3,7 +3,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "crypto1/crypto01.h"
+#include "include/crypto01.h"
 #include "include/util_posix.h"
 
 int main(int argc, char *argv[]) {
