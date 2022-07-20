@@ -69,7 +69,7 @@ your command should look like this:
 your key should be output out like so 
 `Found Key: [a0a1a2a3a4a5]`
 
-your keyA for Sector 3 is: `a0a1a2a3a4a5`
+your keyA for Block 3/sector 1 is: `a0a1a2a3a4a5`
 
 ## Used By
 
