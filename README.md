@@ -38,6 +38,9 @@ make for utilising the makefile. build-essential contains both of these for you 
 command syntax for mfkey32v2 is `./mfkey32v2 <uid> <nt> <nr_0> <ar_0> <nt1> <nr_1> <ar_1>`
 
 ## FlipperZero Usage/Examples
+**It is important to note, this is a program you run on your external device after collecting nonces from your flipper, this program sadly cannot run on the flipper itself due to memory requirements, there is talks of offloading this memory requirement to the companion app but for the time being, you will need to use mfkey32v2 on your external device**
+
+
 if you've come from the flipper mfkey32v2 logging, instructions for your command structuring is below:
 if you arent comfortable or capable of running mfkey32v2 by yourself. Message your log output to bettse or equip on discord. 
 
