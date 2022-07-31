@@ -8,21 +8,22 @@
 
 int main(int argc, char *argv[]) {
     struct Crypto1State *s, *t;
-    uint64_t key;     // recovered key
-    uint32_t uid;     // serial number
-    uint32_t nt0;      // tag challenge first
-    uint32_t nt1;      // tag challenge second
-    uint32_t nr0_enc; // first encrypted reader challenge
-    uint32_t ar0_enc; // first encrypted reader response
-    uint32_t nr1_enc; // second encrypted reader challenge
-    uint32_t ar1_enc; // second encrypted reader response
-    uint32_t ks2;     // keystream used to encrypt reader response
+    uint64_t key;
+    uint32_t uid;
+    uint32_t nt0;
+    uint32_t nt1;
+    uint32_t nr0_enc;
+    uint32_t ar0_enc;
+    uint32_t nr1_enc;
+    uint32_t ar1_enc;
+    uint32_t ks2;
 
-    printf("MIFARE Classic key recovery - based 32 bits of keystream  VERSION2\n");
-    printf("Recover key from two 32-bit reader authentication answers only\n");
-    printf("This version implements Moebius two different nonce solution (like the supercard)\n\n");
+    printf("MfKey32v2 open source Mifare Classic key-recovery tool\n");
+    printf("Cracks keys by two 32bit keystream authentications")
+
 
     if (argc < 8) {
+        printf("Invalid syntax.")
         printf("syntax: %s <uid> <nt> <nr_0> <ar_0> <nt1> <nr_1> <ar_1>\n\n", argv[0]);
         return 1;
     }
