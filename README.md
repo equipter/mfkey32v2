@@ -48,7 +48,7 @@ if you arent comfortable or capable of running mfkey32v2 by yourself. Message yo
 2. Then on log level, adjust to `Debug` 
 3. Scan your Mifare Classic and begin `read mifare classic` special action
 **(NOTE: you do not need to have found any keys you just need have a base .nfc file from the output)**
-4. Save your credential on the flipper and begin the card emulation using "detect reader"
+4. Save your credential on the flipper and begin the card emulation
 5. open your Flipper CLI 
 [instructions for CLI](https://forum.flipperzero.one/t/cli-command-line-interface-examples/1874) 
 link to [webcli](https://my.flipp.dev/)
