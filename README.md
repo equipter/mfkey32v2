@@ -1,4 +1,5 @@
 
+
 # Mfkey32 v2
 
 Mfkey32v2 extracts mifare classic keys from nonces collected during the authentication process. These nonces can be collected by emulating the credential to allow the reader to begin despensing the necessary information to begin extraction.
@@ -12,32 +13,34 @@ Mfkey32v2 extracts mifare classic keys from nonces collected during the authenti
 
 
 ## Requirements 
-GCC for compiling C (deb)
-make for utilising the makefile. build-essential contains both of these for you to use
-- `sudo apt install build-essential`
+
+1. GCC for compiling C (deb)
+2. make for utilising the makefile.
+3. git for cloning the repo 
+
+GCC and Makefile
+`sudo apt install build-essential`
+
+git - github CLI 
+`sudo apt-get install git`
+
+**For compilation and use on windows you will need to use MingW or alternate virtual environment.** [link to mingW install instructions](https://genome.sph.umich.edu/wiki/Installing_MinGW_%26_MSYS_on_Windows)
 
 
-(For compiling on windows you'll need a C compiler or use MINGW to create a virtual environment to use GCC)
 
 ## Compilation 
-1. Before compiling make sure your gcc is present and  up to date 
-2. Download code
+1. Download code
 - `git clone https://github.com/equipter/mfkey32v2`
-3. Navigate into repo directory 
+2. Navigate into repo directory 
 - `cd mfkey32v2/`
-4. Compile code with make
+3. Compile mfkey32v2
 - `make mfkey32v2`
-
-(if make is for some reason non cooperative you can manually compile with gcc using this command `gcc mfkey32v2.c include/crypto1.c include/crypto01.c include/bucketsort.c -o mfkey32v2 -Iinclude`
-
 
 ## Standalone Usage
 
 command syntax for mfkey32v2 is `./mfkey32v2 <uid> <nt> <nr_0> <ar_0> <nt1> <nr_1> <ar_1>`
 
 ## FlipperZero Usage/Examples
-**It is important to note, this is a program you run on your external device after collecting nonces from your flipper, this program sadly cannot run on the flipper itself due to memory requirements, there is talks of offloading this memory requirement to the companion app but for the time being, you will need to use mfkey32v2 on your external device**
-
 
 if you've come from the flipper mfkey32v2 logging, instructions for your command structuring is below:
 if you arent comfortable or capable of running mfkey32v2 by yourself. Message your log output to bettse or equip on discord. 
@@ -47,11 +50,11 @@ if you arent comfortable or capable of running mfkey32v2 by yourself. Message yo
 3. Scan your Mifare Classic and begin `read mifare classic` special action
 **(NOTE: you do not need to have found any keys you just need have a base .nfc file from the output)**
 4. Save your credential on the flipper and begin the card emulation
-5. open your Flipper CLI 
+5. connect your flipper and open your Flipper CLI 
 [instructions for CLI](https://forum.flipperzero.one/t/cli-command-line-interface-examples/1874) 
 link to [webcli](https://my.flipp.dev/)
 6. start `log` 
-7. while still emulating the UID, approach your flipperzero to the reader 
+7. while still emulating the UID, approach your flipperzero to the reader while your device is still connected to the flipper
 8. your CLI should output logs see below for an example. find the lines like this 
 ```
 70795 [D][MfClassic]: 939be0d5 keyA block 3 nt/nr/ar: 4e70d691 b3a576be 02c1559b
