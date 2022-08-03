@@ -23,7 +23,7 @@ int main(int argc, char *argv[]) {
 
 
     if (argc < 8) {
-        printf("Invalid syntax.")
+        printf("Invalid syntax.");
         printf("syntax: %s <uid> <nt> <nr_0> <ar_0> <nt1> <nr_1> <ar_1>\n\n", argv[0]);
         return 1;
     }
