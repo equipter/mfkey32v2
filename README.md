@@ -47,7 +47,7 @@ if you arent comfortable or capable of running mfkey32v2 by yourself. Message yo
 
 1. On your FZ navigate to settings an enable debug. 
 2. Then on log level, adjust to `Debug` 
-3. Scan your Mifare Classic and begin `read mifare classic` special action
+3. Scan your Mifare Classic
 **(NOTE: you do not need to have found any keys you just need have a base .nfc file from the output)**
 4. Save your credential on the flipper and begin the card emulation
 5. connect your flipper and open your Flipper CLI 
