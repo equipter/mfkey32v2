@@ -79,6 +79,7 @@ your keyA for Block 3/sector 1 is: `a0a1a2a3a4a5`
 
 This project is used by the following Repositories:
 
+- [Credited on @UberGuidoZ 's playground repo](https://github.com/UberGuidoZ/Flipper)
 - [FlipperZero Offical firmware](https://github.com/flipperdevices/flipperzero-firmware)
 - [RogueMaster FlipperZero Firmware](https://github.com/RogueMaster/flipperzero-firmware-wPlugins)
 - [Credited in DJsime Awesome-Flipperzero](https://github.com/djsime1/awesome-flipperzero/blob/main/Firmwares.md)
