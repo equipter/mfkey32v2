@@ -19,7 +19,7 @@ int main(int argc, char *argv[]) {
     uint32_t ks2;
 
     printf("MfKey32v2 open source Mifare Classic key-recovery tool\n");
-    printf("Cracks keys by two 32bit keystream authentications")
+    printf("Cracks keys by two 32bit keystream authentications");
 
 
     if (argc < 8) {
