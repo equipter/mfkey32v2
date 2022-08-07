@@ -1,6 +1,6 @@
 
 
-# Mfkey32 v2
+# Mfkey32 Version 2
 
 Mfkey32v2 extracts mifare classic keys from nonces collected during the authentication process. These nonces can be collected by emulating the credential to allow the reader to begin despensing the necessary information to begin extraction.
 ## Acknowledgements
