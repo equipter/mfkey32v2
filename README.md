@@ -44,6 +44,7 @@ command syntax for mfkey32v2 is `./mfkey32v2 <uid> <nt> <nr_0> <ar_0> <nt1> <nr_
 
 if you've come from the flipper mfkey32v2 logging, instructions for your command structuring is below:
 if you arent comfortable or capable of running mfkey32v2 by yourself. Message your log output to bettse or equip on discord. 
+![](https://i.imgur.com/pYD9qUC.gif)
 
 1. On your FZ navigate to settings an enable debug. 
 2. Then on log level, adjust to `Debug` 
