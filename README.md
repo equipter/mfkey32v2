@@ -80,7 +80,8 @@ your keyA for Block 3/sector 1 is: `a0a1a2a3a4a5`
 
 ### Using Detect Reader
 
-Another example is the usage of the flippers Detect Reader function. It will creates a ```.mfkey32.log``` file under ```/nfc```. Open the file and use the keys in the file:
+Another example is the usage of the flippers Detect Reader function. Simply activate detect reader and approach the reader you wish to obtain keys from. After a moment a file will be output in the nfc folder with the suffix `.mfkey.nfc`, inside this file there are log lines of which you can use to calculate the keys using mfkey32v2. 
+
 
 Example:
 ```
@@ -92,7 +93,7 @@ Sector 0 key A cuid 2a234f80 nt0 f793ebf3 nr0 b783530a ar0 d1607737 nt1 a7ed17fe
 ...
 ```
 
-With the values you can calculate the keys too. Use the keys one by one as logged in the file. For the first line it will be 
+Use the keys one by one as logged in the file. For the first line it will be 
 ```
 ./mfkey32v2 2a234f80 240bd022 ad2e1687 57e6f7e4 18a4bd3e accc1a23 6f10e401
 ```
