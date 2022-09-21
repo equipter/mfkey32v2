@@ -119,6 +119,11 @@ Keystream used to generate {ar} and {at}:
 Found Key: [a0a1a2a3a4a5]
 ```
 
+### automaticall scrape log file 
+if youve used the detect reader method you will be outputted an `mfkey.log`, drag that file into the mfkey32v2 folder and run this command to easily produce the keys for you from the file. 
+```for i in $(cat mfkey.log | cut -d" " -f6,8,10,12,14,16,18 | sed 's/ /,/g'); do cuid=$(echo $i | cut -d"," -f1); v2=$(echo $i | cut -d"," -f2);v3=$(echo $i | cut -d"," -f3);v4=$(echo $i | cut -d"," -f4);v5=$(echo $i | cut -d"," -f5);v6=$(echo $i | cut -d"," -f6);v7=$(echo $i | cut -d"," -f7); ./mfkey32v2 $cuid $v2 $v3 $v4 $v5 $v6 $v7 | fgrep 'Found Key' >> keys.txt; done```
+
+
 ## Used By
 
 This project is used by the following Repositories:
