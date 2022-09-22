@@ -97,6 +97,16 @@ Use the keys one by one as logged in the file. For the first line it will be
 ```
 ./mfkey32v2 2a234f80 240bd022 ad2e1687 57e6f7e4 18a4bd3e accc1a23 6f10e401
 ```
+
+You can use cut or awk to generate these statements from the log file:
+```
+# Using cut
+IFS=$'\n'; for line in `cut -d' ' -f6,8,10,12,14,16,18 mfkey32.log`; do echo ./mfkey32 $line; done
+
+# Using awk
+IFS=$'\n'; for line in `awk '{print $6 " " $8 " " $10 " " $12 " " $14 " " $16" " $18}' mfkey32.log`; do echo ./mfkey32v2 $line; done
+```
+
 The output shows the calculated key
 ```
 MfKey32v2 open source Mifare Classic key-recovery tool
