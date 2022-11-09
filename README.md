@@ -36,6 +36,9 @@ git - github CLI
 3. Compile mfkey32v2
 - `make mfkey32v2`
 
+### Compiling On Windows
+If `mingw32-make` fails with the error `make (e=2): The system cannot find the file specified.` try: `mingw32-make CC=gcc`
+
 ## Standalone Usage
 
 command syntax for mfkey32v2 is `./mfkey32v2 <uid> <nt> <nr_0> <ar_0> <nt1> <nr_1> <ar_1>`
