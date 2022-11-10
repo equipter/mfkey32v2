@@ -150,14 +150,14 @@ for i in $(cat mfkey.log | cut -d" " -f6,8,10,12,14,16,18 | sed 's/ /,/g'); do c
 you can also use the included .sh file, drag your mfkey.log file into the mfkey32v2 folder and run the .sh file to automatically scape keys 
 
 ### Using Flipper website
-if you are too lazy or you don't know how to compile mfkey32v2, you can also use [Flipper website](https://lab.flipper.net/nfc-tools)
+if you are unable to or don't know how to compile mfkey32v2, you can also use [Flipper's web tool version of mfkey32v2](https://lab.flipper.net/nfc-tools)
 
 1. connect your flipper, you have to keep closed qFlipper
 2. go to the previous website
 3. and press `GIVE ME THE KEYS` button
 4. it will pull your log file, calculate the keys and add them to your dictionary.
 
-**KEEP IN MIND**: this method will override your user dict with the new keys, so have a backup. 
+**KEEP IN MIND**: this method will automatically replace your `mf_classic_user_dict.nfc` dictionary with a file containing just these new keys, so make sure you have a backup as this method will remove any keys you currently have stored in `mf_classic_user_dict.nfc`
 
 
 ## Used By
