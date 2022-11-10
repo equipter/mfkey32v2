@@ -45,6 +45,10 @@ command syntax for mfkey32v2 is `./mfkey32v2 <uid> <nt> <nr_0> <ar_0> <nt1> <nr_
 
 ## FlipperZero Usage/Examples
 
+### Using Detect Reader using a saved card (Recommended) 
+In the latest release, you can use detect reader using a saved card. This method is the recommended one because it won't use a fixed UID like normal detect reader uses and also it is more discreet than using a computer connected to your Flipper.
+![](https://user-images.githubusercontent.com/45500329/201108244-7dc02b7a-fd82-4446-85e3-c44e852c69b7.gif)
+
 
 ### Using Detect Reader
 
@@ -144,6 +148,16 @@ for i in $(cat mfkey.log | cut -d" " -f6,8,10,12,14,16,18 | sed 's/ /,/g'); do c
 ```
 
 you can also use the included .sh file, drag your mfkey.log file into the mfkey32v2 folder and run the .sh file to automatically scape keys 
+
+### Using Flipper website
+if you are too lazy or you don't know how to compile mfkey32v2, you can also use [Flipper website](https://lab.flipper.net/nfc-tools)
+
+1. connect your flipper, you have to keep closed qFlipper
+2. go to the previous website
+3. and press `GIVE ME THE KEYS` button
+4. it will pull your log file, calculate the keys and add them to your dictionary.
+
+**KEEP IN MIND**: this method will override your user dict with the new keys, so have a backup. 
 
 
 ## Used By
