@@ -4,6 +4,8 @@
 
 Mfkey32v2 extracts mifare classic keys from nonces collected during the authentication process. These nonces can be collected by emulating the credential to allow the reader to begin despensing the necessary nonces to begin calculating keys.
 
+**Disclaimer: No one involved in this project is responsible for how you use it. Always follow local laws and EULAs.**
+
 **Note: Nonce in computer terminology means "Number used once"**
 
 
