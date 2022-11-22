@@ -4,8 +4,6 @@
 
 Mfkey32v2 extracts mifare classic keys from nonces collected during the authentication process. These nonces can be collected by emulating the credential to allow the reader to begin despensing the necessary nonces to begin calculating keys.
 
-**Disclaimer: No one involved in this project is responsible for how you use it. Always follow local laws and EULAs.**
-
 **Note: Nonce in computer terminology means "Number used once"**
 
 
@@ -18,6 +16,9 @@ Mfkey32v2 extracts mifare classic keys from nonces collected during the authenti
 | [Github](https://github.com/equipter) | [Twitter](https://twitter.com/Equip0x80) | [Reddit](https://www.reddit.com/user/equipter) | equip paypal: equipter@outlook.com | bettse paypal: bettse@fastmail.fm | [Discord](https://discord.gg/e9XzfG5nV5) |
 | :---: | :---: | :---: | :---: | :---: | :---: |
 
+## Disclaimer
+
+**No one involved in this project is responsible for how you use it. Always follow local laws and EULAs.**
 
 ## Requirements 
 
