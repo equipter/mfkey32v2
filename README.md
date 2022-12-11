@@ -25,8 +25,8 @@ MfKey32v2 has a few different implementations as time has progressed.
 
 From the list below select the mfkey32v2 instructions best suited to you. 
 
-* [Generic Standalone Mfkey32v2 Cli usage instructions]()
-* [FlipperZero Mfkey32v2 Cli instructions]()
+* [Generic Standalone Mfkey32v2 Cli usage instructions](https://github.com/equipter/mfkey32v2/blob/main/Docs/Generic.md)
+* [FlipperZero Mfkey32v2 Cli instructions](https://github.com/equipter/mfkey32v2/blob/main/Docs/flippercli.md)
 * [FlipperZero Mfkey32v2 Web App Instructions]()
 * [FlipperZero Mfkey32v2 Mobile companion app Instructions]()
 
