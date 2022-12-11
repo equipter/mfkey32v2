@@ -19,6 +19,16 @@ Mfkey32v2 is a tool used to calculate Mifare Classic Keys from encrypted nonces 
 
 **No one involved in this project is responsible for how you use it. Always follow local laws and EULAs.**
 
+## What is Mfkey32v2
+Mfkey32v2 calculates Mifare Classic Sector keys from encrypted nonces collected by emulating the initial card and recording the interaction between the emulated card and the respective reader. 
+
+While performing authentication, the reader will send "nonces" to the card which can be decrypted into keys. 
+
+**Mfkey32v2 is not magic it cannot create you a working credential without an initial card. The Keys generated are not keys to open the door, they are keys to unlock and read sectors from inside the card itself.**
+
+
+
+
 
 ##  Mfkey32v2 Implementations 
 MfKey32v2 has a few different implementations as time has progressed.
