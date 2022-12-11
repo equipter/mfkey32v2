@@ -26,10 +26,6 @@ While performing authentication, the reader will send "nonces" to the card which
 
 **Mfkey32v2 is not magic it cannot create you a working credential without an initial card. The Keys generated are not keys to open the door, they are keys to unlock and read sectors from inside the card itself.**
 
-
-
-
-
 ##  Mfkey32v2 Implementations 
 MfKey32v2 has a few different implementations as time has progressed.
 
@@ -40,6 +36,12 @@ From the list below select the mfkey32v2 instructions best suited to you.
 * [FlipperZero Mfkey32v2 Web App Instructions](https://github.com/equipter/mfkey32v2/blob/main/Docs/flip-site.md)
 * [FlipperZero Mfkey32v2 Mobile companion app Instructions](https://github.com/equipter/mfkey32v2/blob/main/Docs/flip-app.md)
 
+### Datasheets
+If you are interested in mfkey32v2 and/or mifare classic as a whole, below are links for mifare classic and other relevant datasheets.
+* [Mifare Classic 1k ev1](https://www.nxp.com/docs/en/data-sheet/MF1S50YYX_V1.pdf)
+* [Mifare Classic 4k ev1](https://www.nxp.com/docs/en/data-sheet/MF1S70YYX_V1.pdf)
+* [Mifare Identifcation Procedure - AN10833](https://www.nxp.com/docs/en/application-note/AN10833.pdf)
+
 
 # Support 
-For support in using Mfkey32v2 message Equip#1515 on discord or submit a github issue
+For support in using Mfkey32v2 message Equip#1515 on discord, submit a github issue or join my discord [link](
