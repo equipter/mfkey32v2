@@ -31,15 +31,5 @@ From the list below select the mfkey32v2 instructions best suited to you.
 * [FlipperZero Mfkey32v2 Mobile companion app Instructions]()
 
 
-##  Mfkey32v2 Implementations 
-MfKey32v2 has a few different implementations as time has progressed.
-
-From the list below select the mfkey32v2 instructions best suited to you. 
-
-* [Generic Standalone Mfkey32v2 Cli usage instructions]()
-* [FlipperZero Mfkey32v2 Cli instructions]()
-* [FlipperZero Mfkey32v2 Web App Instructions]()
-* [FlipperZero Mfkey32v2 Mobile companion app Instructions]()
-
 # Support 
 For support in using Mfkey32v2 message Equip#1515 on discord or submit a github issue
