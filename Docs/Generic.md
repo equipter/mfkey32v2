@@ -45,7 +45,8 @@ input:
 ` ./mfkey32v2 2a234f80 240bd022 ad2e1687 57e6f7e4 18a4bd3e accc1a23 6f10e401`
 
 output:
-`MfKey32v2 open source Mifare Classic key-recovery tool
+```
+MfKey32v2 open source Mifare Classic key-recovery tool
 Cracks keys by two 32bit keystream authenticationsRecovering key for:
     uid: 2a234f80
    nt_0: 240bd022
@@ -62,7 +63,8 @@ LFSR successors of the tag challenge:
 Keystream used to generate {ar} and {at}:
   ks2: aa0975fa
 
-Found Key: [a0a1a2a3a4a5]`
+Found Key: [a0a1a2a3a4a5]
+```
 
 
 ## After Key Calculation 
