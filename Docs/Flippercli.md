@@ -38,7 +38,26 @@ try: `mingw32-make CC=gcc`
 In the latest release, you can use detect reader using a saved card. This method is the recommended one because it won't use a fixed UID like normal detect reader uses and also it is more discreet than using a computer connected to your Flipper.
 
 
+
 ![](https://user-images.githubusercontent.com/45500329/201108244-7dc02b7a-fd82-4446-85e3-c44e852c69b7.gif)
+
+You can use cut or awk to generate these statements from the log file:
+```
+# Using cut
+IFS=$'\n'; for line in `cut -d' ' -f6,8,10,12,14,16,18 mfkey32.log`; do echo ./mfkey32 $line; done
+ 
+# Using awk
+IFS=$'\n'; for line in `awk '{print $6 " " $8 " " $10 " " $12 " " $14 " " $16" " $18}' mfkey32.log`; do echo ./mfkey32v2 $line; done
+```
+
+### automatically scrape log file for keys 
+if youve used the detect reader method you will be outputted an `mfkey.log`, drag that file into the mfkey32v2 folder and run this command to easily produce the keys for you from the file. 
+ 
+```
+for i in $(cat mfkey.log | cut -d" " -f6,8,10,12,14,16,18 | sed 's/ /,/g'); do cuid=$(echo $i | cut -d"," -f1); v2=$(echo $i | cut -d"," -f2);v3=$(echo $i | cut -d"," -f3);v4=$(echo $i | cut -d"," -f4);v5=$(echo $i | cut -d"," -f5);v6=$(echo $i | cut -d"," -f6);v7=$(echo $i | cut -d"," -f7); ./mfkey32v2 $cuid $v2 $v3 $v4 $v5 $v6 $v7 | fgrep 'Found Key' >> keys.txt; done
+```
+ 
+you can also use the included .sh file, drag your mfkey.log file into the mfkey32v2 folder and run the .sh file to automatically scape keys 
 
 
  ### Using Log
