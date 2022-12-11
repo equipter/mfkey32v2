@@ -1,5 +1,5 @@
 
-## Using Flipper Web Tool
+# Flipper Web UI Tool usage
 
 ### Using Detect Reader using a saved card
 In the latest release, you can use detect reader using a saved card. This method is the recommended one because it won't use a fixed UID like normal detect reader uses and also it is more discreet than using a computer connected to your Flipper.
