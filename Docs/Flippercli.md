@@ -75,8 +75,9 @@ your command should look like this:
 your key should be output out like so 
 `Found Key: [a0a1a2a3a4a5]`
 
-your keyA for Block 3(sector 0) is: `a0a1a2a3a4a5`
+## After Key Calculation 
+Once your keys have been outut by Mfkey you can now take the keys collected and add them to your `mf_classic_dict.nfc` and `mf_classic_dict_user.nfc` files. be sure to add them to the top of your dictionary. 
 
-
+Once added, clear the cache of your flipper and re scan your initial card. yYu should now notice more keys are found in the process of scanning the card 
 
 
