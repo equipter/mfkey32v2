@@ -27,7 +27,7 @@ From the list below select the mfkey32v2 instructions best suited to you.
 
 * [Generic Standalone Mfkey32v2 Cli usage instructions](https://github.com/equipter/mfkey32v2/blob/main/Docs/Generic.md)
 * [FlipperZero Mfkey32v2 Cli instructions](https://github.com/equipter/mfkey32v2/blob/main/Docs/Flippercli.md)
-* [FlipperZero Mfkey32v2 Web App Instructions]()
+* [FlipperZero Mfkey32v2 Web App Instructions](https://github.com/equipter/mfkey32v2/blob/main/Docs/flip-site.md)
 * [FlipperZero Mfkey32v2 Mobile companion app Instructions]()
 
 
