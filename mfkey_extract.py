@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # Description: 
 # Dependencies: https://github.com/equipter/mfkey32v2
-# Author: rs-develop
+# Author: rs-develop (https://github.com/rs-develop)
 # Version: 2
 # -----------------------------------------------------------------------
 

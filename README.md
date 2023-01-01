@@ -42,6 +42,5 @@ If you are interested in mfkey32v2 and/or mifare classic as a whole, below are l
 * [Mifare Classic 4k ev1](https://www.nxp.com/docs/en/data-sheet/MF1S70YYX_V1.pdf)
 * [Mifare Identifcation Procedure - AN10833](https://www.nxp.com/docs/en/application-note/AN10833.pdf)
 
-
 # Support 
 For support in using Mfkey32v2 message Equip#1515 on discord, submit a github issue or join my [discord](https://discord.gg/e9XzfG5nV5).
