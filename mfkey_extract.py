@@ -1,8 +1,7 @@
 #!/usr/bin/python
-# Description: 
 # Dependencies: https://github.com/equipter/mfkey32v2
-# Author: rs-develop (https://github.com/rs-develop)
-# Version: 2
+# Author: rs-develop (https://github.com/rs-develop/flipper-stuff-pub)
+# Version: 2.1
 # -----------------------------------------------------------------------
 
 import sys
@@ -107,24 +106,38 @@ class MifareExtracter:
     def readDataFromFlipper(self) -> None:
         self._connectToFlipperCli()
         self._flipper_cli.write(b'\x03') # send CTR+C (ETX)
-        self._flipper_cli.write(f"storage read /ext/nfc/.mfkey32.log\r".encode())
-        self._flipper_cli.readline() # scipt command
-        self._flipper_cli.readline() # scrip file size
+        self._flipper_cli.write(f"storage read /ext/nfc/.mfkey32.log\r\n".encode())
+        self._flipper_cli.readline() # skip \r\n
+        self._flipper_cli.readline() # skip >:
+        print(self._flipper_cli.readline()) # skip size
         for item in self._flipper_cli.read_until(b'>:').decode().rstrip('\r\n').split('\n'):
             if item.startswith("Storage error"):
                 self._flipper_cli.close()
                 raise MifareExtracterFileReadError(".mfkey32.log")
             if item.startswith("Sec"):
                 self._data.append(item.encode())
-        print("mfkey32.log read from flipper.")
+        self._flipper_cli.write(b'\x03') # send CTR+C (ETX)
+        print("Finished reading \".mfkey32.log\" file.")
 
     def writeUserDictToFlipper(self) -> None:
+        self._flipper_cli.write(b'\x03') # send CTR+C (ETX)
+        self._flipper_cli.write(f"storage read /ext/nfc/assets/mf_classic_dict_user.nfc\r\n".encode())
+        print(self._flipper_cli.readline()) # skip \r
+        print(self._flipper_cli.readline()) # skip >:
+        print(self._flipper_cli.readline()) # skipt cmd
+        # read the old key's from mf_classic_dict_user.nfc
+        for item in self._flipper_cli.read_until(b'>:').decode().rstrip('\r\n').rstrip('\r').split('\n'):
+            if not item.startswith("Storage error"):
+                res = re.match(r"^[a-fA-F0-9]{12}", item)
+                if res:
+                    self._keys.add(res[0].upper())
+        # after reading, remove the old file
         self._flipper_cli.write(f"storage remove /ext/nfc/assets/mf_classic_dict_user.nfc\r\n".encode())
         self._flipper_cli.write(b'\x03') # send CTR+C (ETX)
-        self._flipper_cli.write(f"storage write /ext/nfc/assets/mf_classic_dict_user.nfc\r\n".encode())
+        self._flipper_cli.write(f"storage write /ext/nfc/assets/mf_classic_dict_user.nfc\r".encode())
         for key in self._keys:
             self._flipper_cli.write((key.upper()+'\r\n').encode())
-        self._flipper_cli.write(b'\x03') # end sending data by sending CTR+C (ETX)
+        self._flipper_cli.write(b'\x03') # stop flipper writing data by sending CTR+C (ETX)
         print("The file \"mf_classic_dict_user.nfc\" was written to flipper successfully.")
 
     def extractKeys(self) -> None:    
@@ -137,8 +150,8 @@ class MifareExtracter:
                                             stdout=subprocess.PIPE).stdout.decode('utf-8')
                 key_res = re.findall(r"Found Key: \[([a-f0-9]{12})", mfkey_res)
                 if key_res:
-                    print(" - Key found: "+ key_res[0])
-                    self._keys.add(key_res[0])
+                    print(" - Key found: "+ key_res[0].upper())
+                    self._keys.add(key_res[0].upper())
             print(" ------------")
             print(" - " + str(len(self._keys)) + " unique key's found!")
         else:
@@ -150,15 +163,78 @@ class MifareExtracter:
                 out.writelines(key.upper() + "\n")
             print("Key's written to mf_classic_dict_user.nfc. Copy the file to your flipper into \"NFC->assets\".")
 
-# end class FMCKE
+    def cleanCacheDirectory(self) -> int:
+        fileList = []
+        if not self._flipper_cli:
+            self._connectToFlipperCli()
+        # Get file count from /ext/nfc/.cache directory
+        self._flipper_cli.write(b'\x03') # send CTR+C (ETX)
+        self._flipper_cli.write(f"storage list /ext/nfc/.cache\r\n".encode())
+        self._flipper_cli.readline() # skip \r
+        self._flipper_cli.readline() # skip >:
+        # read file list
+        for item in self._flipper_cli.read_until(b'>:').decode().rstrip('\r\n').split('\n'):
+            res = re.findall(r"[a-fA-F0-9]{8}.keys", item)
+            if res:
+                fileList.append(res[0])
+        self._flipper_cli.write(b'\x03') # send CTR+C (ETX)
+        for file in fileList:
+            cmd = "storage remove /ext/nfc/.cache/" + file + "\r\n"
+            self._flipper_cli.write(cmd.encode())
+            self._flipper_cli.read_until(b'>:')
+            self._flipper_cli.write(b'\x03') # send CTR+C (ETX)
+        return len(fileList)
+
+    def cleanmfkey32Log(self):
+        if not self._flipper_cli:
+            self._connectToFlipperCli()
+        self._flipper_cli.write(b'\x03') # send CTR+C (ETX)
+        self._flipper_cli.write(f"storage remove /ext/nfc/.mfkey32.log\r\n".encode())
+        self._flipper_cli.readline() # skip \r
+        self._flipper_cli.readline() # skip >:
+        for item in self._flipper_cli.read_until(b'>:').decode().rstrip('\r\n').split('\n'):
+            if item.startswith("Storage error"):
+                raise MifareExtracterFileReadError("File not exists")
+        self._flipper_cli.read_until(b'>:')
+
+    def bkpUserDict(self):
+        if not self._flipper_cli:
+            self._connectToFlipperCli()
+        self._flipper_cli.write(b'\x03') # send CTR+C (ETX)
+        self._flipper_cli.write(f"storage copy /ext/nfc/assets/mf_classic_dict_user.nfc /ext/nfc/assets/mf_classic_dict_user.nfc.bkp\r\n".encode())
+        self._flipper_cli.readline() # skip \r
+        self._flipper_cli.readline() # skip >:
+        for item in self._flipper_cli.read_until(b'>:').decode().rstrip('\r\n').split('\n'):
+            if item.startswith("Storage error"):
+                raise MifareExtracterFileReadError("File not exists")
+        self._flipper_cli.write(b'\x03') # send CTR+C (ETX)
+
+    def rmUserDict(self):
+        if not self._flipper_cli:
+            self._connectToFlipperCli()
+        self._flipper_cli.write(b'\x03') # send CTR+C (ETX)
+        self._flipper_cli.write(f"storage remove /ext/nfc/assets/mf_classic_dict_user.nfc\r\n".encode())
+        self._flipper_cli.readline() # skip \r
+        self._flipper_cli.readline() # skip >:
+        for item in self._flipper_cli.read_until(b'>:').decode().rstrip('\r\n').split('\n'):
+            if item.startswith("Storage error"):
+                raise MifareExtracterFileReadError("File not exists")
+        self._flipper_cli.read_until(b'>:')
+        self._flipper_cli.write(b'\x03') # send CTR+C (ETX)
+
+# end class MifareExtracter
 
 # -----------------------------------------------------------------------
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description = "Extracts Mifare valus from flipper or a local mfkey32.log file, computes the key's using mfkey32v2 and uploads them to flipper. The cli and detect mode are Linux only.")
+    parser = argparse.ArgumentParser(description = "Extracts Mifare valus from flipper or a local mfkey32.log file, computes the key's using mfkey32v2 and uploads them to flipper. The new computed key's will added to the content of the \"/SD/nfc/assets/mf_classic_dict_user.nfc\" file. The cli and detect mode are Linux only.")
     parser.add_argument("--cli", action='store_true', help="Extract the values via flipper CLI, compute the key's and upload them to flipper (full auto mode)")
     parser.add_argument("--detect", action='store_true',help="Detect Flipper Zero Device - prints only the block device")
     parser.add_argument("--extract", dest="logfile", help="Extract Keys from a local mfkey32.log file and creates a \"mf_classic_dict_user.nfc\" file.", type=str)
+    parser.add_argument("--clean-cache", action='store_true',help="Removes all files in the (/SD/nfc/.cache) directory.")
+    parser.add_argument("--clean-mfkey32-log", action='store_true',help="Cleans the mfkey32.log file from flipper.")
+    parser.add_argument("--bkp-user-dict", action='store_true',help="Creates a backup of the \"mf_classic_dict_user.nfc\" file. The backup file will be placed in the same dir on the flipper.")
+    parser.add_argument("--rm-dict-user", action='store_true',help="Removes the \"mf_classic_dict_user.nfc\" file from the flipper.")
 
     if len(sys.argv)==1:
         parser.print_help(sys.stderr)
@@ -187,6 +263,25 @@ if __name__ == '__main__':
             keyExtrator.readFile(args.logfile)
             keyExtrator.extractKeys()
             keyExtrator.writeUserDict()
+            print("Finished")
+        elif args.clean_cache:
+            print("Cleaning .cache directory...")
+            print("Removed " + str(keyExtrator.cleanCacheDirectory()) + " file(s) from /SD/nfc/.cache")
+            print("Finished")
+        elif args.clean_mfkey32_log:
+            print("Cleaning \".mfkey32.log\" file ...")
+            keyExtrator.cleanmfkey32Log()
+            print("\".mfkey32.log\" file removed ...")
+            print("Finished")
+        elif args.bkp_user_dict:
+            print("Backup the \"mf_classic_dict_user.nfc\" file ...")
+            keyExtrator.bkpUserDict()
+            print("Backup done, file: \"mf_classic_dict_user.nfc.bkp\"")
+            print("Finished")
+        elif args.rm_dict_user:
+            print("Removing \"mf_classic_dict_user.nfc\" file from flipper ...")
+            keyExtrator.rmUserDict()
+            print("User dict removed.")
             print("Finished")
         else:
             raise MifareExtracterUnknownError()
