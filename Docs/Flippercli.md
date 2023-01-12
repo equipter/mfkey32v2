@@ -66,7 +66,7 @@ usage: mfkey_extract.py [-h] [--cli] [--detect] [--extract LOGFILE]
                         [--clean-cache] [--clean-mfkey32-log] [--bkp-user-dict]
                         [--rm-dict-user]
 
-Extracts Mifare valus from flipper or a local mfkey32.log file, computes the
+Extracts Mifare values from flipper or a local mfkey32.log file, computes the
 key's using mfkey32v2 and uploads them to flipper. The new computed key's will
 added to the content of the "/SD/nfc/assets/mf_classic_dict_user.nfc" file. The
 cli and detect mode are Linux only.
