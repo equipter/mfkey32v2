@@ -26,6 +26,14 @@ While performing authentication, the reader will send "nonces" to the card which
 
 **Mfkey32v2 is not magic it cannot create you a working credential without an initial card. The Keys generated are not keys to open the door, they are keys to unlock and read sectors from inside the card itself.**
 
+## Collecting Nonces with the FlipperZero 
+1. After scanning your mifare classic and verifying you do not have all sector keys, save the file. 
+2. Navigate to NFC -> Saved -> [Your File] -> detect reader 
+3. Approach reader with flipperzero and observe nonces being collected. 
+4. Once collected you can move on to cracking, see below the different methods (NOTE: They all do the same thing just in different ways) 
+![image](https://user-images.githubusercontent.com/72751518/214213828-1fd5bef9-7978-4508-ac05-06a691de3a01.png)
+
+
 ##  Mfkey32v2 Implementations 
 MfKey32v2 has a few different implementations as time has progressed.
 
