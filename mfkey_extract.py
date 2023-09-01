@@ -8,6 +8,7 @@ import sys
 import re
 import subprocess
 import os
+import glob
 import serial
 import argparse
 
@@ -74,10 +75,17 @@ class MifareExtracter:
             raise MifareExtracterFileReadError(file)
 
     def detectFlipperLinux(self) -> str:
-        # detect flipper device for linux
-        dmesg_res = subprocess.Popen(['dmesg'], stdout=subprocess.PIPE)
-        tail_res = subprocess.run(['tail', '-20'], stdin=dmesg_res.stdout, stdout=subprocess.PIPE).stdout.decode('utf-8')
-        res = re.findall(r"ttyACM[0-9]{1,2}", tail_res)
+        sysroot = "/sys/bus/usb/devices/"
+        res = []
+        for bus_id in os.listdir(sysroot):
+            if os.path.isdir(sysroot + bus_id):
+                bus_path = f"{sysroot}{bus_id}/"
+                if "idVendor" not in os.listdir(bus_path):
+                    continue
+                if "5740" == open(f"{bus_path}idProduct").read(4) and "0483" == open(f"{bus_path}idVendor").read(4):
+                    ttys = glob.glob(f"{bus_path[:-1]}:*/tty")
+                    res = os.listdir(f"{ttys[0]}")
+                    break
         if not res:
             raise MifareExtracterFlipperDeviceError()
         if not os.path.exists("/dev/" + res[0]):
