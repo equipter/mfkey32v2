@@ -12,8 +12,6 @@ Mfkey32v2 is a tool used to calculate Mifare Classic Keys from encrypted nonces 
  - [RRG Author's file](https://github.com/equipter/mfkey32v2/blob/main/AUTHORS.md)
  - [Bettse for assisting in development](https://gitlab.com/bettse)
 
-| [Github](https://github.com/equipter) | [Twitter](https://twitter.com/Equip0x80) | [Reddit](https://www.reddit.com/user/equipter) |  [Discord](https://discord.gg/e9XzfG5nV5) |
-| :---: | :---: | :---: | :---: | 
 
 ## Disclaimer
 
@@ -51,4 +49,4 @@ If you are interested in mfkey32v2 and/or mifare classic as a whole, below are l
 * [Mifare Identification Procedure - AN10833](https://www.nxp.com/docs/en/application-note/AN10833.pdf)
 
 # Support 
-For support in using Mfkey32v2 message Equip#1515 on discord, submit a github issue or join my [discord](https://discord.gg/e9XzfG5nV5).
+For support in using Mfkey32v2 message Equip on discord or file a github issue.
