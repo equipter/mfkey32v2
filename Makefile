@@ -5,4 +5,6 @@ MYINCLUDES = -Iinclude
 BINS = mfkey32v2.c
 INSTALLTOOLS = $(BINS)
 
+LDFLAGS = -Wl,-z,max-page-size=16384
+
 mfkey32v2:$(MYSRCS)
