@@ -1,0 +1,49 @@
+#!/bin/bash
+#
+# flipper-crack - Convenience wrapper for macOS (and Linux) full-auto nonce cracking + key loading.
+# Place this in the mfkey32v2 directory (same dir as the compiled binary and mfkey_extract.py).
+#
+# Usage:
+#   ./flipper-crack
+#
+# It will:
+#   - Build mfkey32v2 if missing
+#   - Ensure pyserial is available
+#   - Run the extractor in --cli mode (auto-detects your Flipper on macOS)
+#
+# Prerequisites:
+#   - Flipper plugged via USB, qFlipper closed
+#   - Nonces already collected on device via Detect Reader (see Docs/macOS.md)
+#
+# After success: clear NFC cache on the Flipper and re-read your card.
+
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$SCRIPT_DIR"
+
+echo "==> mfkey32v2 Flipper nonce cracker (macOS-friendly wrapper)"
+echo "==> Working dir: $SCRIPT_DIR"
+
+if [[ ! -x ./mfkey32v2 ]]; then
+  echo "==> mfkey32v2 binary not found — building..."
+  if command -v make >/dev/null 2>&1; then
+    make mfkey32v2
+  else
+    echo "make not found. On macOS: xcode-select --install or brew install make"
+    exit 1
+  fi
+fi
+
+echo "==> Checking for pyserial (python module)..."
+if ! python3 -c 'import serial' >/dev/null 2>&1; then
+  echo "    pyserial not installed — installing via pip (user)..."
+  python3 -m pip install pyserial
+fi
+
+echo "==> Starting full-auto mode (--cli)."
+echo "    Make sure your Flipper is connected via USB and qFlipper is NOT running."
+echo "    The script will auto-detect the port (macOS: looks for cu.usbmodem* devices)."
+echo ""
+
+exec python3 mfkey_extract.py --cli

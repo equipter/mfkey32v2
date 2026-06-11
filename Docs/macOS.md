@@ -56,9 +56,17 @@ Inside the CLI you can run `storage list /ext/nfc` etc. Exit screen with Ctrl-A 
 
 3. In the mfkey32v2 directory (where the binary lives):
 
+   Simplest:
+   ```bash
+   ./flipper-crack
+   ```
+
+   Or manually:
    ```bash
    python3 mfkey_extract.py --cli
    ```
+
+   (You can also `make flipper-crack`.)
 
    This will:
    - Auto-detect the serial port
