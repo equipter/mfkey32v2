@@ -1,0 +1,18 @@
+# Build artifacts
+mfkey32v2
+*.o
+__pycache__/
+*.pyc
+*.pyo
+
+# Generated during use
+mfkey32.log
+*.mfkey32.log
+mf_classic_dict_user.nfc
+*.nfc.bkp
+keys.txt
+
+# Editor / OS
+.DS_Store
+*.swp
+*~
