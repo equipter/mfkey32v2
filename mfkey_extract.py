@@ -20,7 +20,7 @@ class MifareExtracterMfkey32v2Error(Exception):
         return self.msg
 class MifareExtracterFlipperDeviceError(Exception):
     def __init__(self):
-        self.msg = "[!] Error: Could not find the flipper device. Try reconnect it. Close the qFlipper application."
+        self.msg = "[!] Error: Could not find the Flipper Zero device. Make sure it is connected via USB (qFlipper closed), then try again. macOS: ls /dev/cu.* | grep -i flip"
     def __str__(self) -> str:
         return self.msg
 class MifareExtracterFlipperCLIError(Exception):
@@ -40,7 +40,7 @@ class MifareExtracterFileReadError(Exception):
         return self.msg
 class MifareExtracterWindowsError(Exception):
     def __init__(self):
-        self.msg = "[!] Error: CLI is not supported for Windows jet. Use the extract argument."
+        self.msg = "[!] Error: CLI / --detect modes not supported on Windows yet. Use --extract with a log file copied via qFlipper, or the web tool at https://lab.flipper.net/nfc-tools ."
     def __str__(self) -> str:
         return self.msg
 class MifareExtracterUnknownError(Exception):
@@ -73,25 +73,72 @@ class MifareExtracter:
         except:
             raise MifareExtracterFileReadError(file)
 
-    def detectFlipperLinux(self) -> str:
-        # detect flipper device for linux
-        dmesg_res = subprocess.Popen(['dmesg'], stdout=subprocess.PIPE)
-        tail_res = subprocess.run(['tail', '-20'], stdin=dmesg_res.stdout, stdout=subprocess.PIPE).stdout.decode('utf-8')
-        res = re.findall(r"ttyACM[0-9]{1,2}", tail_res)
-        if not res:
+    def _detect_flipper_port(self) -> str:
+        """Detect and return the serial device basename (e.g. cu.usbmodemflip_xxx or ttyACM0)
+        for a connected Flipper Zero. Prefers devices whose name contains 'flip'.
+
+        Supports macOS (primary target), Linux, and basic fallbacks.
+        """
+        if sys.platform == "darwin":
+            # macOS: Flipper usually appears as /dev/cu.usbmodemflip_...
+            for glob in ("/dev/cu.usbmodem*", "/dev/cu.*"):
+                try:
+                    out = subprocess.check_output(
+                        ["bash", "-c", f"ls {glob} 2>/dev/null || true"],
+                        text=True
+                    )
+                    candidates = [p.strip() for p in out.strip().splitlines() if p.strip() and os.path.exists(p.strip())]
+                    if candidates:
+                        # Prefer any that mention flip/flipper
+                        for c in candidates:
+                            if "flip" in c.lower():
+                                return os.path.basename(c)
+                        return os.path.basename(candidates[0])
+                except Exception:
+                    continue
             raise MifareExtracterFlipperDeviceError()
-        if not os.path.exists("/dev/" + res[0]):
+        elif sys.platform.startswith("linux"):
+            # Linux: try dmesg (original) then common fallbacks
+            try:
+                dmesg_res = subprocess.Popen(['dmesg'], stdout=subprocess.PIPE)
+                tail_res = subprocess.run(['tail', '-20'], stdin=dmesg_res.stdout, stdout=subprocess.PIPE).stdout.decode('utf-8')
+                res = re.findall(r"ttyACM[0-9]{1,2}", tail_res)
+                if res:
+                    for name in res:
+                        if os.path.exists("/dev/" + name):
+                            return name
+            except Exception:
+                pass
+            try:
+                out = subprocess.check_output(["ls", "/dev/ttyACM*"], stderr=subprocess.DEVNULL, text=True)
+                candidates = [os.path.basename(p) for p in out.strip().splitlines() if p.strip()]
+                if candidates:
+                    return candidates[0]
+            except Exception:
+                pass
             raise MifareExtracterFlipperDeviceError()
-        return res[-1]
+        else:
+            if os.name == "nt":
+                raise MifareExtracterWindowsError()
+            # other POSIX
+            try:
+                out = subprocess.check_output(["ls", "/dev/ttyUSB*"], stderr=subprocess.DEVNULL, text=True)
+                candidates = [os.path.basename(p) for p in out.strip().splitlines() if p.strip()]
+                if candidates:
+                    return candidates[0]
+            except Exception:
+                pass
+            raise MifareExtracterFlipperDeviceError()
 
     def _connectToFlipperCli(self) -> None:
         # Connect to flipper
         try:
-            self._flipper_cli = serial.Serial(port="/dev/" + self.detectFlipperLinux(), baudrate=9600,
-                                              bytesize=8, timeout=1, 
+            port = "/dev/" + self._detect_flipper_port()
+            self._flipper_cli = serial.Serial(port=port, baudrate=9600,
+                                              bytesize=8, timeout=1,
                                               stopbits=serial.STOPBITS_ONE)
             if self._flipper_cli:
-                self._flipper_cli.read_until(b'>:') # skip the CLI welcom screen
+                self._flipper_cli.read_until(b'>:')  # skip the CLI welcome screen
                 print("Connection established.")
         except serial.SerialException as s:
             raise MifareExtracterFlipperCLIError(s.strerror)
@@ -227,7 +274,7 @@ class MifareExtracter:
 # -----------------------------------------------------------------------
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description = "Extracts Mifare valus from flipper or a local mfkey32.log file, computes the key's using mfkey32v2 and uploads them to flipper. The new computed key's will added to the content of the \"/SD/nfc/assets/mf_classic_dict_user.nfc\" file. The cli and detect mode are Linux only.")
+    parser = argparse.ArgumentParser(description = "Extracts Mifare values from flipper or a local mfkey32.log file, computes the key's using mfkey32v2 and uploads them to flipper. The new computed key's will added to the content of the \"/SD/nfc/assets/mf_classic_dict_user.nfc\" file. CLI and --detect modes use USB serial (macOS and Linux supported).")
     parser.add_argument("--cli", action='store_true', help="Extract the values via flipper CLI, compute the key's and upload them to flipper (full auto mode)")
     parser.add_argument("--detect", action='store_true',help="Detect Flipper Zero Device - prints only the block device")
     parser.add_argument("--extract", dest="logfile", help="Extract Keys from a local mfkey32.log file and creates a \"mf_classic_dict_user.nfc\" file.", type=str)
@@ -256,7 +303,7 @@ if __name__ == '__main__':
             print("Detecting flipper Block Device...")
             if os.name == "nt":
                 raise MifareExtracterWindowsError()
-            print("Flipper Device: /dev/" + keyExtrator.detectFlipperLinux())
+            print("Flipper Device: /dev/" + keyExtrator._detect_flipper_port())
             sys.exit(0)
         elif args.logfile:
             print("Starting local mode. Extracting key's from \"" + args.logfile + "\"")
