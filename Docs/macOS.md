@@ -115,3 +115,15 @@ If you don't want to build anything locally:
 After any key update, power-cycle the Flipper or at least clear the NFC cache for the changes to take full effect on the next read.
 
 Support: see the main README or the original repo issues/Discord pointers.
+
+## Verification performed in this fork (on macOS)
+
+- `make mfkey32v2` succeeds and produces a working binary.
+- Example from README:
+  `./mfkey32v2 2a234f80 240bd022 ad2e1687 57e6f7e4 18a4bd3e accc1a23 6f10e401`
+  correctly outputs `Found Key: [a0a1a2a3a4a5]`.
+- `python3 mfkey_extract.py --help` shows the updated macOS-aware description.
+- `python3 mfkey_extract.py --detect` (and the new `_detect_flipper_port`) successfully located a real device: `/dev/cu.usbmodemflip_Kuch1n01`.
+- The `flipper-crack` wrapper and `make flipper-crack` target exist and are executable.
+
+When you have nonces collected, you can now safely run the full flow. The script will respect the exact paths `/ext/nfc/.mfkey32.log` (read) and `/ext/nfc/assets/mf_classic_dict_user.nfc` (read + backup + write merged keys).
