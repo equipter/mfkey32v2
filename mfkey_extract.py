@@ -178,14 +178,24 @@ class MifareExtracter:
                 res = re.match(r"^[a-fA-F0-9]{12}", item)
                 if res:
                     self._keys.add(res[0].upper())
-        # after reading, remove the old file
+        # Explicit backup before we remove + rewrite the user dict (safety net)
+        self._flipper_cli.write(b'\x03') # send CTR+C (ETX)
+        self._flipper_cli.write(f"storage copy /ext/nfc/assets/mf_classic_dict_user.nfc /ext/nfc/assets/mf_classic_dict_user.nfc.bkp\r\n".encode())
+        self._flipper_cli.readline() # skip \r
+        self._flipper_cli.readline() # skip >:
+        for item in self._flipper_cli.read_until(b'>:').decode().rstrip('\r\n').split('\n'):
+            if item.startswith("Storage error"):
+                print("Warning: backup copy to .bkp may have failed (non-fatal)")
+        self._flipper_cli.write(b'\x03') # send CTR+C (ETX)
+
+        # after reading (and backup), remove the old file and write the merged set
         self._flipper_cli.write(f"storage remove /ext/nfc/assets/mf_classic_dict_user.nfc\r\n".encode())
         self._flipper_cli.write(b'\x03') # send CTR+C (ETX)
         self._flipper_cli.write(f"storage write /ext/nfc/assets/mf_classic_dict_user.nfc\r".encode())
         for key in self._keys:
             self._flipper_cli.write((key.upper()+'\r\n').encode())
         self._flipper_cli.write(b'\x03') # stop flipper writing data by sending CTR+C (ETX)
-        print("The file \"mf_classic_dict_user.nfc\" was written to flipper successfully.")
+        print("The file \"mf_classic_dict_user.nfc\" was written to flipper successfully. (A .bkp was also created.)")
 
     def extractKeys(self) -> None:    
         if self._data:
