@@ -2,7 +2,13 @@
 # Flipper Cli Usage
 These instructions are for using the CLI Application in unison with the flipper.
 
-## Requirements 
+## macOS
+
+See the dedicated guide at [Docs/macOS.md](macOS.md).
+
+## Linux
+
+### Requirements 
 
 1. GCC for compiling C (deb)
 2. make for utilising the makefile.
@@ -19,7 +25,7 @@ git - github CLI
 
 
 
-## Compilation 
+### Compilation 
 1. Download code
 - `git clone https://github.com/equipter/mfkey32v2`
 2. Navigate into repo directory 
@@ -27,14 +33,14 @@ git - github CLI
 3. Compile mfkey32v2
 - `make mfkey32v2`
 
-### Compiling On Windows
+#### Compiling On Windows
 If `mingw32-make` fails with the error `make (e=2): The system cannot find the file specified.` 
 
 try: `mingw32-make CC=gcc`
 
-## Collecting the nonces.
+### Collecting the nonces.
 
-### Detect Reader 
+#### Detect Reader 
 In the latest release, you can use detect reader using a saved card. This method is the recommended one because it won't use a fixed UID like normal detect reader uses and also it is more discreet than using a computer connected to your Flipper.
 
 
@@ -50,7 +56,7 @@ IFS=$'\n'; for line in `cut -d' ' -f6,8,10,12,14,16,18 mfkey32.log`; do echo ./m
 IFS=$'\n'; for line in `awk '{print $6 " " $8 " " $10 " " $12 " " $14 " " $16" " $18}' mfkey32.log`; do echo ./mfkey32v2 $line; done
 ```
 
-### automatically scrape log file for keys 
+#### automatically scrape log file for keys 
 if youve used the detect reader method you will be outputted an `mfkey.log`, drag that file into the mfkey32v2 folder and run this command to easily produce the keys for you from the file. 
  
 ```
@@ -60,7 +66,7 @@ for i in $(cat mfkey.log | cut -d" " -f6,8,10,12,14,16,18 | sed 's/ /,/g'); do c
 you can also use the included .sh file, drag your mfkey.log file into the mfkey32v2 folder and run the .sh file to automatically scape keys 
 
 
-## mfkey_extract - automate the key calculation process with flipper zero
+### mfkey_extract - automate the key calculation process with flipper zero
 ```shell
 usage: mfkey_extract.py [-h] [--cli] [--detect] [--extract LOGFILE]
                         [--clean-cache] [--clean-mfkey32-log] [--bkp-user-dict]
@@ -69,7 +75,7 @@ usage: mfkey_extract.py [-h] [--cli] [--detect] [--extract LOGFILE]
 Extracts Mifare values from flipper or a local mfkey32.log file, computes the
 key's using mfkey32v2 and uploads them to flipper. The new computed key's will
 added to the content of the "/SD/nfc/assets/mf_classic_dict_user.nfc" file. The
-cli and detect mode are Linux only.
+cli and detect modes use USB serial (macOS and Linux supported).
 
 options:
   -h, --help           show this help message and exit
@@ -146,7 +152,7 @@ your command should look like this:
 your key should be output out like so 
 `Found Key: [a0a1a2a3a4a5]`
 
-## After Key Calculation 
+### After Key Calculation 
 Once your keys have been outut by Mfkey you can now take the keys collected and add them to your `mf_classic_dict.nfc` and `mf_classic_dict_user.nfc` files. be sure to add them to the top of your dictionary. 
 
 Once added, clear the cache of your flipper and re scan your initial card. You should now notice more keys are found in the process of scanning the card 
